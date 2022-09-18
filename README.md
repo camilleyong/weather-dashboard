@@ -8,5 +8,7 @@ I have created a weather application allowing users to search any city to see th
 
 ## Live Link
 
+(https://camilleyong.github.io/weather-dashboard/)
+
 ## Photo
 ![Screenshot](/Screen%20Shot%202022-09-18%20at%202.05.08%20AM.png)
