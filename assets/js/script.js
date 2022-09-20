@@ -7,6 +7,8 @@ var uvIndex = document.querySelector("#uvIndex");
 var cityName = document.querySelector('#cityName');
 var input = document.querySelector("#input");
 var forecastContainer = $('#forecastContainer');
+var currentIcon = document.querySelector('#currentIcon');
+var currentTime = document.querySelector('#currentTime');
 
 
 // Fetching the API. Displaying search city weather info, submit buttom to work
@@ -17,7 +19,7 @@ function getWeatherApi () {
 
 // Fetching and displaying the city name when user searches
 
-    var weatherURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + input.value + "&appid=19099350b2009c216e953f3dddf3a632";
+    var weatherURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + input.value + "&appid=19099350b2009c216e953f3dddf3a632";
     
     fetch(weatherURL)
         .then(function (response) {
@@ -43,6 +45,13 @@ function getWeatherApi () {
 
     // CURRENT WEATHER INFO
                 console.log (data);
+    var currentImageIcon = data.current.weather[0].icon;
+    var icon = document.createElement('img');
+        
+                icon.setAttribute("src" , "http://openweathermap.org/img/wn/" + currentImageIcon + "@2x.png");
+    var currentDate = moment(data.current.dt , "X").format("MMM Do, YYYY");
+                currentTime.textContent = (currentDate);
+                currentIcon.append(icon);
                 tempInfo.textContent = ("Temperature: " + data.current.temp + "°F");
                 windInfo.textContent = ("Wind Speed: " + data.current.wind_speed + " mph");
                 humidInfo.textContent = ("Humidity: " + data.current.humidity + "%");
@@ -82,7 +91,7 @@ function getWeatherApi () {
         forecastTextMax.text('Max Temp: ' + forecastMax + '°F');
         forecastTextMin.text('Min Temp: ' + forecastMin + '°F');
         forecastTextDesc.text('Description: ' + forecastDescription);
-        forecastIcon.attr("src" , "http://openweathermap.org/img/wn/" + forecastImageIcon + "@2x.png");
+        forecastIcon.attr("src" , "https://openweathermap.org/img/wn/" + forecastImageIcon + "@2x.png");
 
         forecastBody.append(forecastDate, forecastIcon, forecastTextMax, forecastTextMin, forecastTextDesc);
         forecastCard.append(forecastBody);
@@ -101,6 +110,15 @@ submitBtn.addEventListener("click" , getWeatherApi);
 //  Calling the function
 getWeatherApi();
 
+function setUVColor(uvIndex) {
+    if (uvIndex <= 2) {
+      return "favorable";
+    } else if (uvIndex <= 7) {
+      return "moderate";
+    } else {
+      return "severe";
+    }
+  }
 
 // Local Storage for Previous Searches
 var listOfCities = [];
@@ -155,8 +173,7 @@ function setlocalStorage(city) {
 
 function getRecentCity () {
     console.log(this);
-    // var city = city.target.textContent
-    // getWeatherApi(city);
+
 }
 
 displaySearchHistory(city);
