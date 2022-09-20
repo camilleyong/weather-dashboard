@@ -76,6 +76,8 @@ function getWeatherApi () {
     var forecastTextMax = $('<p>').addClass('card-text');
     var forecastTextMin = $('<p>').addClass('card-text');
     var forecastTextDesc = $('<p>').addClass('card-text');
+    var forecastTextWind = $('<p>').addClass('card-text');
+    var forecastTextHumid = $('<p>').addClass('card-text');
     
 // Changed the unix date to regular time
 
@@ -86,14 +88,18 @@ function getWeatherApi () {
     var forecastMin = data.daily[numbers].temp.min;
     var forecastDescription = data.daily[numbers].weather[0].description;
     var forecastImageIcon = data.daily[numbers].weather[0].icon;
+    var forecastWind = data.daily[numbers].wind_speed;
+    var forecastHumid = data.daily[numbers].humidity;
 
         forecastDate.text(unixFormat);
         forecastTextMax.text('Max Temp: ' + forecastMax + '°F');
         forecastTextMin.text('Min Temp: ' + forecastMin + '°F');
         forecastTextDesc.text('Description: ' + forecastDescription);
+        forecastTextWind.text('Wind Speed: ' + forecastWind + ' mph');
+        forecastTextHumid.text('Humidity: ' + forecastHumid + '%');
         forecastIcon.attr("src" , "https://openweathermap.org/img/wn/" + forecastImageIcon + "@2x.png");
 
-        forecastBody.append(forecastDate, forecastIcon, forecastTextMax, forecastTextMin, forecastTextDesc);
+        forecastBody.append(forecastDate, forecastIcon, forecastTextMax, forecastTextMin, forecastTextWind, forecastTextHumid, forecastTextDesc);
         forecastCard.append(forecastBody);
         forecastColumn.append(forecastCard);
         forecastContainer.append(forecastColumn);
