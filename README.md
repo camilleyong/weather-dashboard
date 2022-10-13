@@ -19,6 +19,12 @@ WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 ```
 
+## Installation
+Click the deployed link below.
+
+## Usage
+Search for a city in the search box
+
 ## GitHub Link
 (https://github.com/camilleyong/weather-dashboard)
 
